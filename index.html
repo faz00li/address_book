@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container mt-3">
       <h1>Address Book</h1>
       <div class="row">
         <div class="col-md-6">
@@ -40,6 +40,26 @@
           </form>
           <hr>
 
+
+          <h2>Contacts:</h2>
+          <ul id="contacts">
+          </ul>
+        </div>
+
+
+        <div class="col-md-3">
+          <div id="show-contact">
+            <p>First Name: <span class="first-name"></span></p>
+            <p>Last Name: <span class="last-name"></span></p>
+            <p>Phone Number: <span class="phone-number"></span></p>
+            <p>Email: <span class="email"></span></p>
+            <h5>Addressess:</h5>
+            <ul id="possibleAddress"></ul>
+            <div id="buttons"></div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
           <form id="new-address">
             <div class="form-group">
               <label for="add-address">Address</label>
@@ -52,24 +72,10 @@
                 <option>Billing</option>
               </select>
             </div>
-            <button type="submit" class="btn-primary">Add</button>
           </form>
-          <hr>
+        </div>
 
-          <h2>Contacts:</h2>
-          <ul id="contacts">
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <div id="show-contact">
-            <p>First Name: <span class="first-name"></span></p>
-            <p>Last Name: <span class="last-name"></span></p>
-            <p>Phone Number: <span class="phone-number"></span></p>
-            <p>Email: <span class="email"></span></p>
-            <p>Address: <span class="address"></span></p>
-            <div id="buttons"></div>
-          </div>
-        </div>
+
       </div>
     </div>
   </body>

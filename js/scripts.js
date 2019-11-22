@@ -13,6 +13,20 @@ Contact.prototype.addAddress = function(address) {
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
+Contact.prototype.dipslayAddress = function() {
+
+  var fullAddress = "";
+
+  for(var i = 0; i < this.address.length; i++){
+    if(this.address[i])
+      fullAddress += "/" + this.address[i].address + " : " + this.address[i].type + "/";
+    else
+      fullAddress += "/ empty slot /";
+  };
+
+  return fullAddress;
+
+}
 
 // Business Logic for Address ---------
 function Address(address, type) {
@@ -77,17 +91,31 @@ function displayContactDetails(addressBook) {
   contactsList.html(htmlForContactInfo);
 };
 
+function createAddress() {
+  var inputtedAddress = $("input#add-address").val();
+  var inputtedAddressType = $("select#addressType").val();
+  $("input#add-address").val("");
+  return new Address(inputtedAddress, inputtedAddressType);
+}
+
+function addressFields() {
+
+}
+
+
 function showContact(contactId) {
   var contact = addressBook.findContact(contactId);
   $("#show-contact").show();
   $(".first-name").html(contact.firstName);
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
-  $(".address").html(contact.address);
   $(".email").html(contact.email);
+
+  
   var buttons = $("#buttons");
   buttons.empty();
-  buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
+  buttons.append("<button class='deleteButton mr-2' id=" + contact.id + ">Delete</button>");
+  buttons.append("<button class='addAddress' id=" + contact.id + ">Add Address</button>");
 }
 
 function attachContactListeners() {
@@ -100,6 +128,13 @@ function attachContactListeners() {
     displayContactDetails(addressBook);
   });
 
+  $("#buttons").on("click", ".addAddress", function() {
+    var address = createAddress();
+    var id = $("button.addAddress").attr("id")
+    var contact = addressBook.findContact(id);
+    contact.addAddress(address);
+    showContact(id);
+  });
 };
 
 $(document).ready(function() {
@@ -122,20 +157,5 @@ $(document).ready(function() {
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
   });
-
-  $("form#new-address").submit(function(event) {
-    event.preventDefault();
-
-    var inputtedAddress = $("input#add-address");
-    var inputtedAddressType = $("input#addressType").val();
-    $("input#add-address").val("");
-
-    var address = new Address(inputtedAddress, inputtedAddressType);
-
-
-
-  })
-
-
 
 });
