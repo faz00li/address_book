@@ -98,20 +98,26 @@ function createAddress() {
   return new Address(inputtedAddress, inputtedAddressType);
 }
 
-function addressFields() {
 
-}
 
 
 function showContact(contactId) {
+
   var contact = addressBook.findContact(contactId);
+
   $("#show-contact").show();
   $(".first-name").html(contact.firstName);
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
   $(".email").html(contact.email);
 
-  
+  var addressList = $("ul#possibleAddress");
+  $("li.addressFields").remove();
+
+  contact.address.forEach(function(saved) {
+    addressList.append("<li class=" + 'addressFields' + ">" + saved.address + " " + saved.type + "</li>")
+  });
+
   var buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton mr-2' id=" + contact.id + ">Delete</button>");
